@@ -1,14 +1,14 @@
 import { useDispatch } from 'react-redux';
 import { setFilter } from 'redux/contacts/filterSlice';
+import TextField from '@mui/material/TextField';
+
 export const Filter = () => {
   const dispatch = useDispatch();
   const handleFilterChange = e => dispatch(setFilter(e.target.value));
   return (
     <>
-      <label htmlFor="findName" className="form-label">
-        Find contacts by name
-      </label>
-      <input
+      <TextField
+        label="Find contacts by name"
         id="findName"
         type="text"
         name="filter"

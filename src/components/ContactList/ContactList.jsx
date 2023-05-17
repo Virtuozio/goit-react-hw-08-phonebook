@@ -1,6 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'redux/contacts/operations';
 import { selectVisibleContacts } from 'redux/contacts/selectors';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Button from '@mui/material/Button';
+
 export const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectVisibleContacts);
@@ -8,21 +13,16 @@ export const ContactList = () => {
   const deleteBtn = e => dispatch(deleteContact(e.target.id));
   return (
     <>
-      <ul className="contacts">
+      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         {contacts.map(contact => (
-          <li key={contact.id}>
-            <span className="contacts-name">{contact.name}:</span>
-            <span className="contacts-number">{contact.number}</span>
-            <button
-              id={contact.id}
-              className="contacts-del-btn"
-              onClick={deleteBtn}
-            >
+          <ListItem key={contact.id}>
+            <ListItemText primary={contact.name} secondary={contact.number} />
+            <Button id={contact.id} onClick={deleteBtn}>
               Delete
-            </button>
-          </li>
+            </Button>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </>
   );
 };
