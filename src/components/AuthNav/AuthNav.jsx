@@ -5,10 +5,17 @@ export const AuthNav = () => {
   return (
     <div>
       <NavLink className={css.link} to="/register">
-        <Button variant="contained">Register</Button>
+        {({ isActive }) => (
+          <Button variant={isActive ? 'contained' : 'outlined'}>
+            Register
+          </Button>
+        )}
       </NavLink>
+
       <NavLink className={css.link} to="/login">
-        <Button variant="outlined">Log In</Button>
+        {({ isActive }) => (
+          <Button variant={isActive ? 'contained' : 'outlined'}>Log In</Button>
+        )}
       </NavLink>
     </div>
   );

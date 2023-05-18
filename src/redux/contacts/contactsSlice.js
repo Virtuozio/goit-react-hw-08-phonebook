@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addContact, fetchContacts, deleteContact } from './operations';
+import { addContact, fetchContacts, deleteContact } from './contactsOperations';
 const contactsInitialState = {
   contacts: [],
   isLoading: false,
@@ -17,39 +17,30 @@ const contactsSlice = createSlice({
   name: 'contacts',
   initialState: contactsInitialState,
 
-  extraReducers: {
-    //get
-
-    [fetchContacts.pending]: handlePending,
-    [fetchContacts.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.contacts = action.payload;
-    },
-    [fetchContacts.rejected]: handleRejected,
-
-    //add
-
-    [addContact.pending]: handlePending,
-    [addContact.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.contacts.push(action.payload);
-    },
-    [addContact.rejected]: handleRejected,
-
-    //delete
-
-    [deleteContact.pending]: handlePending,
-    [deleteContact.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      const index = state.contacts.findIndex(
-        contact => contact.id === action.payload.id
-      );
-      state.contacts.splice(index, 1);
-    },
-    [deleteContact.rejected]: handleRejected,
+  extraReducers: builder => {
+    builder
+      .addCase(fetchContacts.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = null;
+        state.contacts = payload;
+      })
+      .addCase(addContact.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = null;
+        state.contacts.push(payload);
+      })
+      .addCase(deleteContact.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = null;
+        const index = state.contacts.findIndex(task => task.id === payload.id);
+        state.contacts.splice(index, 1);
+      })
+      .addCase(fetchContacts.pending, handlePending)
+      .addCase(addContact.pending, handlePending)
+      .addCase(deleteContact.pending, handlePending)
+      .addCase(fetchContacts.rejected, handleRejected)
+      .addCase(addContact.rejected, handleRejected)
+      .addCase(deleteContact.rejected, handleRejected);
   },
 });
 

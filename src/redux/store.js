@@ -13,7 +13,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { authReducer } from './auth/slice';
+import { authReducer } from './auth/authSlice';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -27,7 +27,7 @@ const middleware = [
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token', 'contacts'],
+  whitelist: ['token'],
 };
 
 export const store = configureStore({

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from 'redux/contacts/operations';
-import { selectVisibleContacts } from 'redux/contacts/selectors';
+import { deleteContact } from 'redux/contacts/contactsOperations';
+import { selectVisibleContacts } from 'redux/contacts/contactsSelectors';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { register } from 'redux/auth/operations';
+import { register } from 'redux/auth/authOperations';
 import css from './RegisterForm.module.css';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
